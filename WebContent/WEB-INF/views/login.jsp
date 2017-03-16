@@ -36,7 +36,7 @@
       <p class="message">Already registered? <a href="#">Sign In</a></p>
     </form>
 
-    <form class="login-form" action="./LoginController">
+    <form class="login-form" action=".\Login">
       <input type="text" placeholder="username" name="userName" placeholder="userName" required="required"/>
       <input type="password" placeholder="password" name="password" placeholder="password" required="required"/>
       <button>login</button>

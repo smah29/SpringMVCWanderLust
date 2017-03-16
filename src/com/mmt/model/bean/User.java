@@ -1,11 +1,34 @@
 package com.mmt.model.bean;
+//import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.stereotype.Component;
+
+import com.sujata.validator.Phone;
+import com.sujata.validator.Password;
+
+//@Component
 public class User {
+
+	@NotEmpty
+	@Length(min=1, max=20)
 	private String userId;
+	@NotEmpty
+	@Length(min=1, max=20)
 	private String userName;
-	private long userPhoneNo;
+	@NotEmpty
+	@Phone
+	private String userPhoneNo;
+	@NotEmpty
+	@Email
 	private String userEmailId;
+	@Length(min=10, max=50)
 	private String userAddress;
+	@Length(min=3, max=20)
+	@Password
+	@NotEmpty
 	private String userPassword;
 
 	public User() {
@@ -13,7 +36,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String userId, String userName, long userPhoneNo, String userEmailId, String userAddress,
+	public User(String userId, String userName, String userPhoneNo, String userEmailId, String userAddress,
 			String userPassword) {
 		super();
 		this.userId = userId;
@@ -35,10 +58,10 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public long getUserPhoneNo() {
+	public String getUserPhoneNo() {
 		return userPhoneNo;
 	}
-	public void setUserPhoneNo(long userPhoneNo) {
+	public void setUserPhoneNo(String userPhoneNo) {
 		this.userPhoneNo = userPhoneNo;
 	}
 	public String getUserEmailId() {
