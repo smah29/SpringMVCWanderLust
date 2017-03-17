@@ -9,8 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.mmt.model.bean.FlightBooking;
+import org.springframework.stereotype.Repository;
 
+import com.mmt.model.bean.FlightBooking;
+@Repository
 public class FlightBookingImpMMT implements FlightBookingDaoMMT {
 	Connection con;
 	//display the details of flightbooking
