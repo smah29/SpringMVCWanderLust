@@ -10,6 +10,7 @@
  	<context:component-scan base-package="com.mmt.newController"></context:component-scan>
  	
  	<mvc:annotation-driven></mvc:annotation-driven>
+ 	<mvc:resources location="/static/" mapping="/static/**"/>
  	
  	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
