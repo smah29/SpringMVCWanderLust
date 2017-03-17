@@ -7,12 +7,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.mmt.model.bean.Flight;
 import com.mmt.model.bean.FlightBooking;
 import com.mmt.model.dao.FlightBookingDaoMMT;
 import com.mmt.model.dao.FlightBookingImpMMT;
 import com.mmt.model.dao.FlightDaoImplMMT;
-
+@Service
 public class FlightBookingBlMMT {
 
 	FlightDaoImplMMT flightdao = new FlightDaoImplMMT();
