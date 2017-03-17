@@ -2,6 +2,7 @@ package com.mmt.newController;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,22 +22,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.mmt.model.bean.Flight;
+import com.mmt.model.bean.FlightBooking;
 import com.mmt.model.bean.Promotion;
 import com.mmt.model.bean.User;
 import com.mmt.model.bl.FlightBookingBlMMT;
+import com.mmt.model.bl.FlightPaymentBl;
 import com.mmt.model.bl.HotelBlMMT;
 import com.mmt.model.bl.PromotionBlMMT;
 import com.mmt.model.bl.UserBlMMT;
+import com.mmt.model.bl.WalletBlMMT;
 
 
-@SessionAttributes({"user","flight"})
+@SessionAttributes({"user","flightSource","flightDestination","departureDate","flight","moneyToBeAdded","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking"})
 @Controller
 public class UserController {
 	private FlightBookingBlMMT flightBookingBlMMT = new FlightBookingBlMMT();
+	FlightBooking flightBooking = new FlightBooking();
 	private HotelBlMMT hotelBlMMT = new HotelBlMMT();
 	private UserBlMMT userBl=new UserBlMMT();
 	PromotionBlMMT promoBl = new PromotionBlMMT();
 	ArrayList<Promotion> arrayListPromoFlight = null;
+	FlightPaymentBl flightPaymentBl = new FlightPaymentBl();
 	@RequestMapping("/")
 	public String newRegistration1(){
 		
@@ -46,6 +52,27 @@ public class UserController {
 	public String newRegistration2(){
 	
 		return "Login";
+	}
+	@RequestMapping("/logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "BlackHeader";
+		
+	}
+	@RequestMapping("/userLogin")
+	public String welcomeUser(){
+	
+		return "UserLogin";
+	}
+	@RequestMapping("/ConfirmFlightBooking")
+	public String confirmFlightBooking(){
+	
+		return "ConfirmFlightBooking";
+	}
+	@RequestMapping("/addMoney")
+	public String addmoney(){
+	
+		return "AddMoney";
 	}
 	@RequestMapping("/signup")
 	public ModelAndView newRegistration(){
@@ -118,10 +145,19 @@ public class UserController {
 		return "FlightForm";
 	}
 	@RequestMapping("/SelectFlight")
-	public ModelAndView SelectFlight(@ModelAttribute("flight") Flight flight) {
+	public ModelAndView SelectFlight(@ModelAttribute("flight") Flight flight,HttpServletRequest request,ModelMap model) {
+		String source = request.getParameter("flightSource");
+		String destination = request.getParameter("flightDestination");
+		String departureDate = request.getParameter("departureDate");
+		int  noOfSeats = Integer.parseInt(request.getParameter("seats"));
+		model.addAttribute("flightSource", source );
+		model.addAttribute("departureDate", departureDate);
+		model.addAttribute("flightDestination", destination );
+		
+		model.addAttribute("noOfSeats", noOfSeats);
 		List<Flight> flightList=new ArrayList<Flight>();
 		try {
-			flightList=flightBookingBlMMT.searchFlight(flight.getFlightSource(), flight.getFlightDestination());
+			flightList=flightBookingBlMMT.searchFlight(source, destination);
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			
 			e.printStackTrace();
@@ -142,6 +178,128 @@ public class UserController {
 		
 	}
 	@RequestMapping("/Payment")
+	public String paymentFlight(HttpServletRequest request,HttpSession session,ModelMap model)
+	{
+		String view=null;
+		String promoPickedID = request.getParameter("promoflight");
+		double flightTicketPrice = (double) session.getAttribute("flightTicketPrice");
+		String flightIDPicked = (String) session.getAttribute("flightId");
+		User user = (User) session.getAttribute("user");
+		String userId = user.getUserId();
+		int noOfSeats = (int) session.getAttribute("noOfSeats");
+		double cartValue = 0;
+		cartValue = flightPaymentBl.cartValue(flightTicketPrice, noOfSeats);
+		double valueAfterPromotion = 0;
+		if (promoPickedID.equals("-")) {
+			valueAfterPromotion = cartValue;
+		}else{
+			try {
+				valueAfterPromotion = promoBl.applyPromotion( promoBl.searchPromotion(promoPickedID),
+						userId, cartValue);
+			} catch (ClassNotFoundException | SQLException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			if (flightPaymentBl.checkFunds(userId, valueAfterPromotion)){
+				model.addAttribute("finalValuetobepaid", valueAfterPromotion);
+				view="ConfirmFlightBooking";
+			}
+			else{
+				session.setAttribute("finalValuetobepaid", valueAfterPromotion);
+				WalletBlMMT walletBl = new WalletBlMMT();
+				double moneyToBeAdded = valueAfterPromotion - (walletBl.walletBalance(userId));
+				String message = "Add atleast " + moneyToBeAdded + " to Wallet to book flight seat";
+				model.addAttribute("moneyToBeAdded", moneyToBeAdded);
+				model.addAttribute("messageFlight", message);
+				view="AddMoney";
+			}
+			
+		} catch (ClassNotFoundException | SQLException | IOException e) {
+			
+			e.printStackTrace();
+		}
+		return view;
+	}
+	@RequestMapping("/MoneyAddded")
+	public String moneyAdding(HttpServletRequest request,HttpSession session,ModelMap model){
+		double moneyToAdd = Double.parseDouble(request.getParameter("amount"));
+		WalletBlMMT walletBl = new WalletBlMMT();
+		User user = (User) session.getAttribute("user");
+		boolean value = false;
+		String msgMoney = "";
+		double balance = 0;
+		String preciseBalance = null;
+		
+		try {
+			value = walletBl.addWalletMoney(user.getUserId(), moneyToAdd);
+		} catch (ClassNotFoundException | SQLException | IOException e) {
+		
+			e.printStackTrace();
+		}
+		if (value == true) {
+			msgMoney = moneyToAdd+" Successfully Added to Wallet";
+			try {
+				balance = walletBl.walletBalance(user.getUserId());
+				DecimalFormat df2 = new DecimalFormat(".##");
+				preciseBalance = df2.format(balance);
+			} catch (ClassNotFoundException | SQLException | IOException e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("balance", preciseBalance);
+			model.addAttribute("msgMoney", msgMoney);
+			}
+		return "Wallet";
+	}
+	@RequestMapping("/confirmBookingFlight")
+	public String confirmFlightBooking1(HttpSession session,ModelMap model){
+		double valueAfterPromotion = (double) session.getAttribute("finalValuetobepaid");
+		User user = (User) session.getAttribute("user");
+		boolean paymentStatus = false;
+		WalletBlMMT walletBlMMT = new WalletBlMMT();
+		String view=null;
+		try {
+			paymentStatus = walletBlMMT.subtractWalletMoney(user.getUserId(), valueAfterPromotion);
+		} catch (ClassNotFoundException | SQLException | IOException e) {
+			
+			e.printStackTrace();
+		}
+		if (paymentStatus) {
+			String flightIDPicked = (String) session.getAttribute("flightId");
+			System.out.println(flightIDPicked);
+			String source = (String) session.getAttribute("flightSource");
+			String destination = (String) session.getAttribute("flightDestination");
+			int seats = (int) session.getAttribute("noOfSeats");
+			try {
+				flightBooking = flightBookingBlMMT.bookFlight(user.getUserId(), flightIDPicked, source, destination,
+						seats);
+			} catch (ClassNotFoundException | SQLException | IOException e) {
+				
+				e.printStackTrace();
+			}
+			if (flightBooking != null) {
+//				String messageFlight=(String) session.getAttribute("messageFlight");
+//				messageFlight=null;
+//				model.addAttribute("messageFlight", messageFlight);
+				model.addAttribute("flightBooking", flightBooking);
+				view="FinalFlightStep";
+			}
+			else{
+				try {
+					paymentStatus = walletBlMMT.addWalletMoney(user.getUserId(), valueAfterPromotion);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					
+					e.printStackTrace();
+				}
+//				String messageFlight=(String) session.getAttribute("messageFlight");
+//				messageFlight=null;
+//				model.addAttribute("messageFlight", messageFlight);
+				view="NoFlightBooking";
+			}
+		}
+		return view;
+		
+	}
 	@ModelAttribute("flightSourceList")
 	public Set<String> flightSourceList() {
 
@@ -185,5 +343,11 @@ public class UserController {
 		}
 		return hotelList;
 	}
+	
+//	@ModelAttribute("flightBookingID")
+//	public String flightBookingIdsent(){
+//		return flightBooking.getFlightBookingId();
+//		
+//	}
 	
 }

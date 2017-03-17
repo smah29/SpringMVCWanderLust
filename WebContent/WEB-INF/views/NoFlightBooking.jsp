@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="./userLogin">
+<form action="UserLogin.jsp">
 <p>Seats Not Available!!
 <input type="submit" value="Okay">
 </form>
