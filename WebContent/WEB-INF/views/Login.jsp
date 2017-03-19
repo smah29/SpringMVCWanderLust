@@ -8,13 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <jsp:include page="BlackHeader.jsp"></jsp:include>
-<SCRIPT type="text/javascript">
-    window.history.forward();
-    function noBack() { window.history.forward(); }
-</SCRIPT>
+
 </head>
-<body onload="noBack();"
-    onpageshow="if (event.persisted) noBack();" onunload="">
+<body>
 Language : <a href="?lang=en">English</a>|<a href="?lang=de">German</a><br>
 
 <form:form action="./loginCheck" method="post">
