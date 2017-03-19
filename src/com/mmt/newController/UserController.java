@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.mmt.model.bean.Flight;
@@ -34,7 +35,7 @@ import com.mmt.model.bl.WalletBlMMT;
 
 
 
-@SessionAttributes({"user","flightSource","flightDestination","departureDate","flight","moneyToBeAdded","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking"})
+@SessionAttributes({"user","flightSource","flightDestination","departureDate","flight","moneyToBeAdded","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking","nomessage"})
 @Controller
 public class UserController {
 	private FlightBookingBlMMT flightBookingBlMMT = new FlightBookingBlMMT();
@@ -125,33 +126,33 @@ public class UserController {
 		
 		
 	}
-	@RequestMapping("/loginCheck")
-	public String userLoginCheck(HttpServletRequest request,ModelMap model){
+	@RequestMapping(value ="/loginCheck", method = RequestMethod.POST)
+	public ModelAndView userLoginCheck(HttpServletRequest request,ModelMap model){
 		String username=request.getParameter("username");
         String password=request.getParameter("password");
         
-		String view=null;
+		//String view=null;
 		User user=null;
-		
+		ModelAndView mv=null;
 		try {
 			//user =(User)userBl.checkLogin(user.getUserId(),user.getUserPassword());
 			user =(User)userBl.checkLogin(username, password);
-			model.addAttribute("user", user);
+			
 			if(user != null){
-				
-				view="UserDashBoard";
+				model.addAttribute("user", user);
+				mv=new ModelAndView("UserDashBoard");
 
 			}
 			else{
-				model.addAttribute("message","Login Failed");
-				view="status";
+				mv=new ModelAndView("status");
+				
 			}
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 		
 			e.printStackTrace();
 		}
 		
-		return view;
+		return mv;
 		
 		
 	}
@@ -179,7 +180,13 @@ public class UserController {
 			
 			e.printStackTrace();
 		}
-		ModelAndView mv=new ModelAndView("LoggedInDisplayAllFlightsStD", "arrayListFlight", flightList);
+		ModelAndView mv=null;
+		if (flightList.isEmpty()) {
+			String message = "No Flights from  " + source + " to " + destination;
+			mv=new ModelAndView("NoFlightFromStD","nomessage", message);
+		} else 
+		{mv=new ModelAndView("LoggedInDisplayAllFlightsStD", "arrayListFlight", flightList);}
+		
 		return mv;
 	}
 	@RequestMapping("/ChoosePromoFlight")

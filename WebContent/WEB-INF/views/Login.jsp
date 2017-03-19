@@ -17,7 +17,7 @@
     onpageshow="if (event.persisted) noBack();" onunload="">
 Language : <a href="?lang=en">English</a>|<a href="?lang=de">German</a><br>
 
-<form:form action="./loginCheck">
+<form:form action="./loginCheck" method="post">
 <!--  User&nbsp;&nbsp; ID&nbsp;&nbsp;<input type="text" name="username" required/><br>
 Password&nbsp;<input type="password" name="password" required/><br>-->
 <table>
