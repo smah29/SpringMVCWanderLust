@@ -53,6 +53,21 @@ public class UserController {
 	
 		return "Login";
 	}
+	@RequestMapping("/Wallet")
+	public String Wallet(){
+	
+		return "Wallet";
+	}
+	@RequestMapping("/ContactUs")
+	public String contactUs(){
+	
+		return "ContactUs";
+	}
+	@RequestMapping("/AboutUs")
+	public String aboutUs(){
+	
+		return "AboutUs";
+	}
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();

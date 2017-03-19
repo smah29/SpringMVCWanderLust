@@ -22,7 +22,7 @@ color:maroon;
 <body>
 	<form action="./confirmBookingHotel">
 <table border="1">
-	<tr><td>Hotel Id:</td><td>${hotelId}</td></tr>		
+	<tr><td>Hotel Id:</td><td>${hotelIdNEW}</td></tr>		
 	<tr><td>		Hotel Name:</td><td>${hotelName}</td></tr>
 	<tr><td>	 Room No:</td><td> ${hotelRoomNo}</td></tr>
 	<tr><td>	 Location:</td><td>${place}</td></tr>

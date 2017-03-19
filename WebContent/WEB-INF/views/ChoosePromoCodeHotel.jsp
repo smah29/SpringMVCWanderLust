@@ -25,9 +25,9 @@
 		 xhttp.open("GET", "hotelPromo.txt", true);
 		 xhttp.send();*/
 		document.getElementById("demo").innerHTML = "Congrats! You got a discount of "
-				+ '${pdiscountHotel}'
+				+ '${hotelPromo.getPromotionDiscount()}'
 				+ "%<br>Your Promotion ID is "
-				+ ' ${pidHotel}';
+				+ ' ${hotelPromo.getPromotionId()}';
 				
 	}
 </script>

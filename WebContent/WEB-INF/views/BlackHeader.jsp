@@ -39,14 +39,14 @@ background-attachment: fixed;
   <div class="container-fluid">
     
     <ul class="nav navbar-nav">
-      <li ><a href="FlightForm.jsp">Flight</a></li>
+      <!--  <li ><a href="FlightForm.jsp">Flight</a></li>
       
       
-      <li><a href="HotelForm.jsp">Hotel</a>  </li>
+      <li><a href="HotelForm.jsp">Hotel</a>  </li>-->
         
      
-      <li><a href="ContactUs.jsp">Contact</a></li>
-      <li><a href="AboutUs.jsp">About us</a></li>
+      <li><a href="./ContactUs">Contact</a></li>
+      <li><a href="./AboutUs">About us</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="./signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

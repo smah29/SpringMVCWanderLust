@@ -56,7 +56,7 @@ background-attachment: fixed;
 
 			<li><a href="./UserPastFlight">Past Flight Bookings</a></li>
 			<li><a href="./UserPastHotel">Past Hotel Bookings</a></li>
-			<li><a href="Wallet.jsp"> Wallet</a></li>
+			<li><a href="./Wallet"> Wallet</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 

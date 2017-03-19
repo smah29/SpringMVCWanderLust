@@ -34,7 +34,7 @@ import com.mmt.model.bl.HotelPaymentBl;
 import com.mmt.model.bl.PromotionBlMMT;
 import com.mmt.model.bl.WalletBlMMT;
 
-@SessionAttributes({"hotelId","user","moneyToBeAdded","messageHotel","balance","finalValuetobepaid","noOfRooms","din","dout","hotelName","duration","place","from","to","hotelBooking"})
+@SessionAttributes({"hotelIdNEW","user","moneyToBeAdded","messageHotel","balance","finalValuetobepaid","noOfRooms","din","dout","hotelName","duration","place","from","to","hotelBooking"})
 @Controller
 public class HotelController {
 
@@ -119,7 +119,7 @@ public class HotelController {
 		System.out.println("hotelId "+hotelId);
 		String hotelName = (String) session.getAttribute("hotelName");
 		System.out.println("hotelName "+hotelName);
-		model.addAttribute("hotelId", hotelId);
+		model.addAttribute("hotelIdNEW", hotelId);
 		model.addAttribute("hotelName", hotelName);
 		ArrayList<HotelRoom> arrayListHotelRoom = null;
 		try {
@@ -182,7 +182,7 @@ public class HotelController {
 		String view=null;
 		String promoPickedID = request.getParameter("promohotel");
 		System.out.println("promoPickedID "+promoPickedID);
-		String hotelIDPicked = (String) session.getAttribute("hotelId");
+		String hotelIDPicked = (String) session.getAttribute("hotelIdNEW");
 		System.out.println("hotelIDPicked "+hotelIDPicked);
 		User user = (User) session.getAttribute("user");
 		String userId = user.getUserId();
@@ -267,7 +267,7 @@ public class HotelController {
 			CheckInDate = (Date) session.getAttribute("din");
 			Date CheckOutDate = null;
 			CheckOutDate = (Date) session.getAttribute("dout");
-			String hotelId = (String) session.getAttribute("hotelId");
+			String hotelId = (String) session.getAttribute("hotelIdNEW");
 			int hotelRoomNo = (int) session.getAttribute("hotelRoomNo");
 			try {
 				hotelBooking = hotelBlMMT.bookHotel(user.getUserId(), hotelId, hotelRoomNo, CheckInDate, CheckOutDate);
