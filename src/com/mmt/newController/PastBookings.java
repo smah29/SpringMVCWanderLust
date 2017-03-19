@@ -3,7 +3,8 @@ package com.mmt.newController;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import com.mmt.model.bl.UserBlMMT;
 @SessionAttributes("user")
 @Controller
 public class PastBookings {
+	private static Logger logger=Logger.getLogger(PastBookings.class);
 	UserBlMMT blMMT = new UserBlMMT();
 	@RequestMapping("/UserPastFlight")
 	public ModelAndView pastFlights(HttpSession session){
@@ -33,6 +35,8 @@ public class PastBookings {
 			e.printStackTrace();
 		}
 		ModelAndView mv=new ModelAndView("UserPastFlight","bookedFlightList",bookedFlightList);
+		BasicConfigurator.configure();
+	 	logger.info("UserPastFlight"); 
 		return mv;
 		}
 	@RequestMapping("/UserPastHotel")
@@ -47,6 +51,7 @@ public class PastBookings {
 			e.printStackTrace();
 		}
 		ModelAndView mv=new ModelAndView("UserPastHotel","bookedHotelList",bookedHotelList);
+		logger.info("UserPastHotel");
 		return mv;
 		}
 	@RequestMapping("/ViewPastFlight")
@@ -60,11 +65,13 @@ public class PastBookings {
 			e.printStackTrace();
 		}
 		ModelAndView mv=new ModelAndView("PrintFlightTicket","viewedFlightDetails",flight);
+		logger.info("PrintFlightTicket");
 		return mv;
 		}
 	@RequestMapping("/UserProfile")
 	public String profileUser(HttpSession session){
 		User user = (User) session.getAttribute("user");
+		logger.info("UserProfile");
 		return "UserProfile";
 		
 	}

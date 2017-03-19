@@ -33,6 +33,7 @@ import com.mmt.model.bl.UserBlMMT;
 import com.mmt.model.bl.WalletBlMMT;
 
 
+
 @SessionAttributes({"user","flightSource","flightDestination","departureDate","flight","moneyToBeAdded","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking"})
 @Controller
 public class UserController {
@@ -49,9 +50,10 @@ public class UserController {
 		return "BlackHeader";
 	}
 	@RequestMapping("/login")
-	public String newRegistration2(){
+	public ModelAndView newRegistration2(){
 	
-		return "Login";
+		//return new ModelAndView("Login","command",new User());
+		return new ModelAndView("Login");
 	}
 	@RequestMapping("/Wallet")
 	public String Wallet(){
@@ -132,7 +134,7 @@ public class UserController {
 		User user=null;
 		
 		try {
-			
+			//user =(User)userBl.checkLogin(user.getUserId(),user.getUserPassword());
 			user =(User)userBl.checkLogin(username, password);
 			model.addAttribute("user", user);
 			if(user != null){

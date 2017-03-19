@@ -11,19 +11,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.mmt.model.bean.Flight;
 import com.mmt.model.bean.Hotel;
 import com.mmt.model.bean.HotelBooking;
 import com.mmt.model.bean.HotelRoom;
@@ -33,17 +28,20 @@ import com.mmt.model.bl.HotelBlMMT;
 import com.mmt.model.bl.HotelPaymentBl;
 import com.mmt.model.bl.PromotionBlMMT;
 import com.mmt.model.bl.WalletBlMMT;
-
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 @SessionAttributes({"hotelIdNEW","user","moneyToBeAdded","messageHotel","balance","finalValuetobepaid","noOfRooms","din","dout","hotelName","duration","place","from","to","hotelBooking"})
 @Controller
 public class HotelController {
-
+	private static Logger logger=Logger.getLogger(PastBookings.class);
 	private HotelBlMMT hotelBlMMT = new HotelBlMMT();
 	private HotelBooking hotelBooking = new HotelBooking();
 	@RequestMapping("/searchHotel")
 	public String searchHotel(ModelMap model) {
 		Hotel hotel=new Hotel();
 		model.addAttribute("hotel", hotel);
+		BasicConfigurator.configure();
+	 	logger.info("--------------------HotelForm-----------------");
 		return "HotelForm";
 	}
 	
@@ -58,6 +56,7 @@ public class HotelController {
 		} catch (SQLException | ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
+		logger.info("--------------------hotelLocationList-----------------");
 		return hotelList;
 	}
 	@RequestMapping("/SearchHotelByPlace")
