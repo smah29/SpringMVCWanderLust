@@ -38,7 +38,7 @@ import com.mmt.model.bl.WalletBlMMT;
 public class UserController {
 	private FlightBookingBlMMT flightBookingBlMMT = new FlightBookingBlMMT();
 	FlightBooking flightBooking = new FlightBooking();
-	private HotelBlMMT hotelBlMMT = new HotelBlMMT();
+	
 	private UserBlMMT userBl=new UserBlMMT();
 	PromotionBlMMT promoBl = new PromotionBlMMT();
 	ArrayList<Promotion> arrayListPromoFlight = null;
@@ -330,19 +330,7 @@ public class UserController {
 	}
 	
 	
-	@ModelAttribute("hotelList")
-	public Set<String> hotelList() {
-
-		Set<String> hotelList = new HashSet<String>();
-		try {
-
-			hotelList =  hotelBlMMT.getHotelLocationList();
-
-		} catch (SQLException | ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-		return hotelList;
-	}
+	
 	
 //	@ModelAttribute("flightBookingID")
 //	public String flightBookingIdsent(){

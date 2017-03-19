@@ -51,7 +51,7 @@ background-attachment: fixed;
 			<!--  <li><a href="LoogedInFlightForm.jsp">Flight</a></li>-->
 
 			 <li><a href="./searchFlight">Flight</a></li>
-			<li><a href="LoggInHotelForm.jsp">Hotel</a></li>
+			<li><a href="./searchHotel">Hotel</a></li>
 
 
 			<li><a href="./UserPastFlight">Past Flight Bookings</a></li>
