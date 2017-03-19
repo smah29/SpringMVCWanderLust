@@ -9,11 +9,10 @@
 <title>Booking done</title>
 </head>
 <body>
-	<form action="./userLogin">
-	<!--<c:set var="flightBooking" scope="session" value="${flightBooking}"/>-->
+<form action="UserLogin.jsp">
+	<!--<c:set var="hotelBooking" scope="session" value="${hotelBooking}"/>-->
 	Booking Confirmed!!<br>
-	<!-- Booking ID: ${flightBooking.getFlightBookingId()}<br><br> -->
-	Booking ID: ${flightBooking.flightBookingId}<br><br>
+	Booking ID: ${hotelBooking.hotelBookingId()}<br><br>
 	<input type="submit" value="Okay">
 	</form>
 </body>

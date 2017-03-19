@@ -27,9 +27,7 @@ ${msgMoney}
     
 </c:if>
 <c:if test="${not empty messageHotel}">
-<jsp:forward page="./ConfirmHotelBooking" >
-<jsp:param name="name" value="${hotelRoomNo}" /> 
-</jsp:forward> 
+<c:redirect url="./confirmBookingHotel"/>
    
    
     
