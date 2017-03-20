@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mmt.model.bean.Admin;
 import com.mmt.model.bean.Flight;
 import com.mmt.model.bean.FlightBooking;
 import com.mmt.model.bean.Promotion;
 import com.mmt.model.bean.User;
+import com.mmt.model.bl.AdminBlMMT;
 import com.mmt.model.bl.FlightBookingBlMMT;
 import com.mmt.model.bl.FlightPaymentBl;
 import com.mmt.model.bl.HotelBlMMT;
@@ -40,7 +43,7 @@ import com.mmt.model.bl.WalletBlMMT;
 public class UserController {
 	private FlightBookingBlMMT flightBookingBlMMT = new FlightBookingBlMMT();
 	FlightBooking flightBooking = new FlightBooking();
-	
+	private AdminBlMMT adminBlMMT = new AdminBlMMT();
 	private UserBlMMT userBl=new UserBlMMT();
 	PromotionBlMMT promoBl = new PromotionBlMMT();
 	ArrayList<Promotion> arrayListPromoFlight = null;
@@ -127,31 +130,42 @@ public class UserController {
 		
 	}
 	@RequestMapping(value ="/loginCheck", method = RequestMethod.POST)
-	public ModelAndView userLoginCheck(HttpServletRequest request,ModelMap model){
+	public ModelAndView userLoginCheck(HttpServletRequest request,ModelMap model) throws IOException{
 		String username=request.getParameter("username");
         String password=request.getParameter("password");
         
 		//String view=null;
 		User user=null;
+		Admin admin=null;
 		ModelAndView mv=null;
 		try {
 			//user =(User)userBl.checkLogin(user.getUserId(),user.getUserPassword());
 			user =(User)userBl.checkLogin(username, password);
 			
-			if(user != null){
-				model.addAttribute("user", user);
-				mv=new ModelAndView("UserDashBoard");
-
-			}
-			else{
-				mv=new ModelAndView("status");
-				
-			}
+			
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 		
 			e.printStackTrace();
 		}
-		
+		try {
+			admin = adminBlMMT.checkAdminLogin(username, password);
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(user != null){
+			model.addAttribute("user", user);
+			mv=new ModelAndView("UserDashBoard");
+
+		}
+		else if(admin != null){
+			model.addAttribute("admin", admin);
+			mv=new ModelAndView("AdminDashBoard");
+		}
+		else{
+			mv=new ModelAndView("status");
+			
+		}
 		return mv;
 		
 		
