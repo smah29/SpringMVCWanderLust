@@ -11,7 +11,7 @@
  	
  	<mvc:annotation-driven></mvc:annotation-driven>
  	<mvc:resources location="/static/" mapping="/static/**"/>
- 	
+ 	<mvc:resources location="/images/" mapping="/images/**"/>
  	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
@@ -29,16 +29,21 @@
         <property value="UTF-8" name="defaultEncoding"/>
     </bean>
    
-    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" id="localeChangeInterceptor">
+   <!--  <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" id="localeChangeInterceptor">
         <property value="lang" name="paramName"/>
-    </bean>
-    
+    </bean>--> 
+    <mvc:interceptors>
+		<bean id="localeChangeInterceptor"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+	</mvc:interceptors>
     <bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver" id="localeResolver">
         <property value="en" name="defaultLocale"/>
     </bean>
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" id="handlerMapping">
+   <!--  <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" id="handlerMapping">
         <property name="interceptors">
-            <ref bean="localeChangeInterceptor"/>
+            <ref bean="localeChangeInterceptor"/> 
     </property>
-</bean>
+</bean>-->
  </beans>

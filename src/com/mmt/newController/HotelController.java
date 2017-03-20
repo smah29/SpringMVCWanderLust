@@ -52,6 +52,7 @@ public class HotelController {
 		try {
 
 			hotelList =  hotelBlMMT.getHotelLocationList();
+			System.out.println(hotelList);
 
 		} catch (SQLException | ClassNotFoundException | IOException e) {
 			e.printStackTrace();
