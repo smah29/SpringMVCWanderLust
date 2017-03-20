@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mmt.model.bean.Admin;
 import com.mmt.model.bean.Flight;
 import com.mmt.model.bean.Hotel;
+import com.mmt.model.bean.Promotion;
 import com.mmt.model.bl.AdminBlMMT;
 import com.mmt.model.bl.FlightBookingBlMMT;
 import com.mmt.model.bl.HotelBlMMT;
+import com.mmt.model.bl.PromotionBlMMT;
 
 @SessionAttributes({"admin","arrayListFlight"})
 @Controller
@@ -124,6 +127,65 @@ public class AdminController {
 			
 			mv=new ModelAndView("AdminDisplayAllHotels","arrayListHotel",arrayListHotel);
 			
+		}
+		return mv;
+		}
+	
+	@RequestMapping("/adminDisplayPromotion")
+	public ModelAndView displayPromotions(){
+		ModelAndView mv=null;
+		ArrayList<Promotion> arrayListPromotion=null;
+		PromotionBlMMT promotionBl=new PromotionBlMMT();
+		
+		String msg=null;
+		try {
+			arrayListPromotion=promotionBl.displayPromotion();
+		} catch (ClassNotFoundException | SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(arrayListPromotion.isEmpty()){
+			msg="No Promomotions Exist ";
+			
+			mv=new ModelAndView("SuccessfulFlightInsertion","msg",msg);
+			
+		}
+		else{
+			
+			mv=new ModelAndView("AdminDisplayAllPromotions","arrayListPromotion",arrayListPromotion);
+			
+		}
+		return mv;}
+	
+	@RequestMapping("/AdminUpdateAdmin")	
+	public String Update(){
+		return "AdminUpdateAdmin";
+	}
+	
+	@RequestMapping("/AdminServProfile")	
+	public ModelAndView profileUpdate(HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException{
+		Admin admin=new Admin();
+		String oldadminId=request.getParameter("oldadminId");
+		ModelAndView mv=null;
+		admin.setAdminId(request.getParameter("adminId"));  
+		admin.setAdminName(request.getParameter("adminName"));
+		admin.setAdminPhoneNo(Long.parseLong(request.getParameter("adminPhoneNo")));
+		admin.setAdminEmailId(request.getParameter("adminEmailId"));
+		admin.setAdminAddress(request.getParameter("adminAddress"));
+		admin.setAdminPassword(request.getParameter("adminPassword"));
+		int row=0;
+		AdminBlMMT adminBl=new AdminBlMMT();
+		row=adminBl.modifyAdmin(oldadminId, admin);
+		if(row>0){
+			msg="Admin Successfully Updated";
+			
+			mv=new ModelAndView("SuccessfulFlightInsertion","msg",msg);
+			
+		}
+		else{
+			
+			msg="Admin Updation Failed";
+			mv=new ModelAndView("SuccessfulFlightInsertion","msg",msg);
 		}
 		return mv;}
 	

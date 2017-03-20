@@ -66,16 +66,16 @@ background-attachment: fixed;
         </ul>
       </li>
       
-     <!--   <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Promotion <span class="caret"></span></a>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Promotion <span class="caret"></span></a>
         <ul class="dropdown-menu">
-         <li><a href="./AdminPromotion?option=display">Display All</a></li>
-          <li><a href="AdminInsertPromotion.jsp?option=insert">Insert</a></li>
+         <li><a href="./adminDisplayPromotion">Display All</a></li>
+          <!--  <li><a href="AdminInsertPromotion.jsp?option=insert">Insert</a></li>
          
           <li><a href="AdminDeletePromotion.jsp?option=delete">Delete</a></li>
            <li><a href="AdminUpdatePromotion.jsp?option=update">Update</a></li>
-            <li><a href="AdminSearchPromotion.jsp?option=search">Search</a></li>
+            <li><a href="AdminSearchPromotion.jsp?option=search">Search</a></li>--> 
         </ul>
-      </li>--> 
+      </li>
       
      <!--    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -85,13 +85,13 @@ background-attachment: fixed;
         </ul>
       </li>-->
       
-    <!--     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <span class="caret"></span></a>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="AdminUpdateAdmin.jsp?option=update">Update Profile</a></li>
-          <li><a href="AdminInsertAdmin.jsp?option=insert">Add Another</a></li>
-          <li><a href="AdminDeleteAdmin.jsp?option=delete">Remove Another</a></li>
+          <li><a href="./AdminUpdateAdmin">Update Profile</a></li>
+          <!-- <li><a href="AdminInsertAdmin.jsp?option=insert">Add Another</a></li>
+          <li><a href="AdminDeleteAdmin.jsp?option=delete">Remove Another</a></li>-->
         </ul>
-      </li>-->
+      </li>
       
      
     </ul>
