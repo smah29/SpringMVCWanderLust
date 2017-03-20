@@ -3,6 +3,8 @@ package com.mmt.model.bl;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Service;
+@Service
 public class FlightPaymentBl {
 	WalletBlMMT walletBL=new WalletBlMMT();
 	public double cartValue(double flightTicketPrice, int seats){

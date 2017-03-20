@@ -74,7 +74,7 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "BlackHeader";
+		return "Login";
 		
 	}
 	@RequestMapping("/userLogin")

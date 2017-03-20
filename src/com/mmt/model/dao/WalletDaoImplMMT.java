@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.mmt.model.bean.Promotion;
 import com.mmt.model.bean.Wallet;
-
+@Repository
 public class WalletDaoImplMMT implements WalletDaoMMT {
 	Connection con = null;
 	// Wallet wl = null;

@@ -3,9 +3,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.mmt.model.bean.Promotion;
 import com.mmt.model.dao.PromotionDaoImplMMT;
 import com.mmt.model.dao.PromotionDaoMMT;
+
+@Service
 public class PromotionBlMMT {
 	private PromotionDaoMMT promotionDao=new PromotionDaoImplMMT();
 	

@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.mmt.model.bean.Wallet;
 import com.mmt.model.dao.WalletDaoImplMMT;
 import com.mmt.model.dao.WalletDaoMMT;
-
+@Service
 public class WalletBlMMT {
 	private WalletDaoMMT walletDao = new WalletDaoImplMMT();
 

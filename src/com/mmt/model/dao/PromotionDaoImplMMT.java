@@ -8,10 +8,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+
+import org.springframework.stereotype.Repository;
+
 import com.mmt.model.dao.DbConnection.*;
 import com.mmt.model.bean.HotelRoom;
 import com.mmt.model.bean.Promotion;
-
+@Repository
 public class PromotionDaoImplMMT implements PromotionDaoMMT {
 
 	Connection con = null;

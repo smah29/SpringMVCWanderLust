@@ -3,6 +3,9 @@ package com.mmt.model.dao;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.Date;
+
+import org.springframework.stereotype.Repository;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import com.mmt.model.bean.Flight;
 import com.mmt.model.bean.HotelBooking;
 
-
+@Repository
 public class HotelBookingDaoImplMMT implements HotelBookingDaoMMT {
 	Connection con;
 

@@ -3,6 +3,8 @@ package com.mmt.model.bl;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Service;
+@Service
 public class HotelPaymentBl {
 	WalletBlMMT walletBL=new WalletBlMMT();
 	

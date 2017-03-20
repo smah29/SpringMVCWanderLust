@@ -9,8 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mmt.model.bean.User;
+import org.springframework.stereotype.Repository;
 
+import com.mmt.model.bean.User;
+@Repository
 public class UserDaoImplMMT implements UserDaoMMT {
 	Connection con;
 	@Override

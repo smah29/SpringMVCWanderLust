@@ -40,7 +40,7 @@ th {
 <body>
 <table border="1">
 	<tr>
-	
+	<th></th>
 	<th>Hotel Id</th>
 	<th>Hotel Name</th>
 	<th>Information</th>
@@ -48,7 +48,7 @@ th {
 	</tr>
 <c:forEach items="${arrayListHotel}" var="hotel">
 <tr>
-	<!--  <td><img src="images/${hotel.getHotelImage()}"  height="100" width="100"/></td>-->
+	 <td><img src="images/${hotel.getHotelImage()}"  height="100" width="100"/></td>
 	
      <td><c:out value="${hotel.getHotelId()}" /></td>
      <td><c:out value="${hotel.getHotelName()}" /></td>
