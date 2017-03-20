@@ -38,7 +38,7 @@ import com.mmt.model.bl.WalletBlMMT;
 
 
 
-@SessionAttributes({"user","flightSource","flightDestination","departureDate","flight","moneyToBeAdded","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking","nomessage"})
+@SessionAttributes({"user","admin","flightSource","flightDestination","departureDate","flight","moneyToBeAdded","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking","nomessage"})
 @Controller
 public class UserController {
 	private FlightBookingBlMMT flightBookingBlMMT = new FlightBookingBlMMT();

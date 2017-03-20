@@ -4,6 +4,13 @@
 <html lang="en">
 <head>
 <style >
+h2 span{
+color: dark grey; 
+   font: bold 24px/45px Helvetica, Sans-Serif; 
+   font-size:100px;
+   letter-spacing: -1px;  
+   padding: 10px;
+}
 body {
 background-image: url(images/img.jpg); /*You will specify your image path here.*/
 
@@ -25,6 +32,9 @@ background-attachment: fixed;
 <body>
 <br>
 <br>
+<h1><span><center>WanderLust</center></span></h1>
+<br>
+<br>
 <br>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -33,30 +43,30 @@ background-attachment: fixed;
     
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Flight <span class="caret"></span></a>
         <ul class="dropdown-menu">
-         <li><a href="./AdminFlight?option=display">Display All</a></li>
-          <li><a href="AdminInsertFlight.jsp?option=insert">Insert</a></li>
+         <li><a href="./AdminDisplayFlight?option=display">Display All</a></li>
+          <!--  <li><a href="AdminInsertFlight.jsp?option=insert">Insert</a></li>
          
-          <li><a href="AdminDeleteFlight.jsp?option=delete">Delete</a></li>
-           <li><a href="AdminUpdateDisplayFlight.jsp?option=update">Update</a></li>
-            <li><a href="AdminSearchFlight.jsp?option=search">Search</a></li>
+          <li><a href="AdminDeleteFlight.jsp?option=delete">Delete</a></li>-->
+           <li><a href="./AdminUpdateDisplayFlight?option=update">Update</a></li>
+           <!--   <li><a href="AdminSearchFlight.jsp?option=search">Search</a></li>-->
         </ul>
       </li>
       
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Hotel <span class="caret"></span></a>
         <ul class="dropdown-menu">
  
-         <li><a href="./AdminHotel?option=display">Display All</a></li>
+         <li><a href="./AdminDisplayHotel?option=display">Display All</a></li>
           <!--  <li><a href="AdminInsertHotel.jsp?option=insert">Insert</a></li>-->
          
-          <li><a href="AdminDeleteHotel.jsp?option=delete">Delete</a></li>
+       <!--   <li><a href="AdminDeleteHotel.jsp?option=delete">Delete</a></li>-->
          <!--   <li><a href="AdminUpdateHotel.jsp?option=update">Update</a></li>-->
-            <li><a href="AdminSearchHotel.jsp?option=search">Search</a></li>
+            <!--  <li><a href="AdminSearchHotel.jsp?option=search">Search</a></li>-->
 
          
         </ul>
       </li>
       
-       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Promotion <span class="caret"></span></a>
+     <!--   <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Promotion <span class="caret"></span></a>
         <ul class="dropdown-menu">
          <li><a href="./AdminPromotion?option=display">Display All</a></li>
           <li><a href="AdminInsertPromotion.jsp?option=insert">Insert</a></li>
@@ -65,28 +75,28 @@ background-attachment: fixed;
            <li><a href="AdminUpdatePromotion.jsp?option=update">Update</a></li>
             <li><a href="AdminSearchPromotion.jsp?option=search">Search</a></li>
         </ul>
-      </li>
+      </li>--> 
       
-       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User <span class="caret"></span></a>
+     <!--    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="AdminSearchUser.jsp?option=search">Search</a></li>
          
          
         </ul>
-      </li>
+      </li>-->
       
-       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <span class="caret"></span></a>
+    <!--     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="AdminUpdateAdmin.jsp?option=update">Update Profile</a></li>
           <li><a href="AdminInsertAdmin.jsp?option=insert">Add Another</a></li>
           <li><a href="AdminDeleteAdmin.jsp?option=delete">Remove Another</a></li>
         </ul>
-      </li>
+      </li>-->
       
      
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="AdminProfile.jsp"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+      <li><a href="./AdminProfile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
       <li><a href="./logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
