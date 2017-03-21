@@ -277,6 +277,7 @@ public class HotelController {
 			if (hotelBooking != null) {
 				
 				//String messageHotel=(String) session.getAttribute("messageHotel");
+				session.removeAttribute("messageHotel");
 				model.addAttribute("hotelBooking", hotelBooking);
 				view="FinalHotelStep";
 				
@@ -289,6 +290,9 @@ public class HotelController {
 					e.printStackTrace();
 				}
 				//String messageHotel=(String) session.getAttribute("messageHotel");
+				session.removeAttribute("messageHotel");
+			String messageHotel=(String) session.getAttribute("messageHotel");
+			System.out.println("messageHotel  ="+messageHotel);
 				view="NoHotelBooking";
 
 			}

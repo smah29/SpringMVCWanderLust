@@ -21,6 +21,7 @@
 <div id="displayBalance">
 Wallet Status&nbsp; :&nbsp;${balance}<br>
 ${msgMoney}
+<c:remove var="msgMoney" scope="session" />
 </div>
 <c:if test="${not empty messageFlight}">
 <c:redirect url="./confirmBookingFlight"/>
