@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,7 +35,8 @@ import org.apache.log4j.Logger;
 @Controller
 public class HotelController {
 	private static Logger logger=Logger.getLogger(PastBookings.class);
-	private HotelBlMMT hotelBlMMT = new HotelBlMMT();
+	
+	private HotelBlMMT hotelBlMMT=new HotelBlMMT();
 	private HotelBooking hotelBooking = new HotelBooking();
 	@RequestMapping("/searchHotel")
 	public String searchHotel(ModelMap model) {

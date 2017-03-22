@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -41,12 +41,18 @@ import com.mmt.model.bl.WalletBlMMT;
 @SessionAttributes({"user","admin","flightSource","flightDestination","departureDate","flight","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking","nomessage"})
 @Controller
 public class UserController {
-	private FlightBookingBlMMT flightBookingBlMMT = new FlightBookingBlMMT();
-	FlightBooking flightBooking = new FlightBooking();
-	private AdminBlMMT adminBlMMT = new AdminBlMMT();
+	
+	private FlightBookingBlMMT flightBookingBlMMT=new FlightBookingBlMMT();
+	
+	FlightBooking flightBooking=new FlightBooking();
+	
+	private AdminBlMMT adminBlMMT=new AdminBlMMT();
+
 	private UserBlMMT userBl=new UserBlMMT();
-	PromotionBlMMT promoBl = new PromotionBlMMT();
+	
+	PromotionBlMMT promoBl=new PromotionBlMMT();
 	ArrayList<Promotion> arrayListPromoFlight = null;
+	
 	FlightPaymentBl flightPaymentBl = new FlightPaymentBl();
 	//Initial Controller
 	@RequestMapping("/")

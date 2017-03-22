@@ -7,6 +7,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -22,7 +23,8 @@ import com.mmt.model.bl.UserBlMMT;
 @Controller
 public class PastBookings {
 	private static Logger logger=Logger.getLogger(PastBookings.class);
-	UserBlMMT blMMT = new UserBlMMT();
+	
+	UserBlMMT blMMT=new UserBlMMT();
 	@RequestMapping("/UserPastFlight")
 	public ModelAndView pastFlights(HttpSession session){
 		

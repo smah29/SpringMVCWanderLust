@@ -21,7 +21,10 @@ function check(){
 	msgFlight = demo.getAttribute("data_messageFlight");
 	msgHotel = demo.getAttribute("data_messageHotel");
 	moneyRequired = demo.getAttribute("moneyRequired");
-	if(msgFlight !=null){
+	/*if(document.getElementById("amount").value<0){
+		alert("Value should be greater than 0");
+	}*/
+	/*if(msgFlight !=null){
 	if(document.getElementById("amount").value < moneyRequired ){
 		alert("Please Enter the Required Amount");
 	}}
@@ -29,7 +32,7 @@ function check(){
 		if(document.getElementById("amount").value < moneyRequired ){
 			alert("Please Enter the Required Amount");
 		}}
-	
+	*/
 }
 </script>
 </head>
@@ -48,8 +51,12 @@ ${messageHotel}
 <fieldset>
 
 Amount&nbsp;&nbsp;  :&nbsp; &nbsp; 
+<c:set var="zero" scope="application" value="0"/>
+<c:if test="${not empty moneyToBeAdded}">
+<c:set var="zero" scope="application" value="${moneyToBeAdded}"/>
+</c:if>
 <!--<input type="number" min="Math.ceil(${moneyToBeAdded})" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/>-->
-<input type="number" min="<fmt:formatNumber value="${moneyToBeAdded}" type="number" pattern="#"/>" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/>
+<input type="number" min="<fmt:formatNumber  value="${zero}" type="number" pattern="#"/>" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/>
 <br>
 <input type="submit" value="Add" id="add" >
 

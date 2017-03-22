@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +26,15 @@ import com.mmt.model.bl.PromotionBlMMT;
 @SessionAttributes({"admin","arrayListFlight"})
 @Controller
 public class AdminController {
+	
 	FlightBookingBlMMT flightBl=new FlightBookingBlMMT();
 	ArrayList<Flight> arrayListFlight=null;
+	
 	AdminBlMMT adminFlight=new AdminBlMMT();
 	ArrayList<Hotel> arrayListHotel=null;
+	
 	AdminBlMMT adminHotel=new AdminBlMMT();
+	
 	HotelBlMMT hotelBl=new HotelBlMMT();
 	int row=0;
 	String msgHotel=null;
