@@ -278,6 +278,7 @@ public class HotelController {
 				
 				//String messageHotel=(String) session.getAttribute("messageHotel");
 				session.removeAttribute("messageHotel");
+				session.removeAttribute("moneyToBeAdded");
 				model.addAttribute("hotelBooking", hotelBooking);
 				view="FinalHotelStep";
 				
@@ -291,8 +292,7 @@ public class HotelController {
 				}
 				//String messageHotel=(String) session.getAttribute("messageHotel");
 				session.removeAttribute("messageHotel");
-			String messageHotel=(String) session.getAttribute("messageHotel");
-			System.out.println("messageHotel  ="+messageHotel);
+			
 				view="NoHotelBooking";
 
 			}

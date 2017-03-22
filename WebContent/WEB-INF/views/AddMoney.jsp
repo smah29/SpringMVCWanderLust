@@ -40,7 +40,7 @@ ${messageHotel}
 
 <fieldset>
 
-Amount&nbsp;&nbsp;  :&nbsp; &nbsp; <input type="number" min="0" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/><br>
+Amount&nbsp;&nbsp;  :&nbsp; &nbsp; <input type="number" min="${moneyToBeAdded}" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/><br>
 <input type="submit" value="Add" id="add" >
 
 <div id ="demo"  data_messageFlight=${messageFlight} moneyRequired=${moneyToBeAdded}></div>

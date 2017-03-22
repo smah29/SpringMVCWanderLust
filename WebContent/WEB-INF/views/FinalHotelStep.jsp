@@ -13,6 +13,7 @@
 	<!--<c:set var="hotelBooking" scope="session" value="${hotelBooking}"/>-->
 	Booking Confirmed!!<br>
 	Booking ID: ${hotelBooking.getHotelBookingId()}<br><br>
+	<c:remove var="hotelBooking" scope="session" />
 	<input type="submit" value="Okay">
 	</form>
 </body>

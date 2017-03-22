@@ -320,6 +320,7 @@ public class UserController {
 //				messageFlight=null;
 //				model.addAttribute("messageFlight", messageFlight);
 				session.removeAttribute("messageFlight");
+				session.removeAttribute("moneyToBeAdded");
 				model.addAttribute("flightBooking", flightBooking);
 				view="FinalFlightStep";
 			}

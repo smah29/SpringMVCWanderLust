@@ -14,6 +14,7 @@
 	Booking Confirmed!!<br>
 	<!-- Booking ID: ${flightBooking.getFlightBookingId()}<br><br> -->
 	Booking ID: ${flightBooking.flightBookingId}<br><br>
+	<c:remove var="flightBooking" scope="session" />
 	<input type="submit" value="Okay">
 	</form>
 </body>
