@@ -24,10 +24,12 @@ ${msgMoney}
 <c:remove var="msgMoney" scope="session" />
 </div>
 <c:if test="${not empty messageFlight}">
+<c:remove var="messageFlight" scope="session" />
 <c:redirect url="./confirmBookingFlight"/>
     
 </c:if>
 <c:if test="${not empty messageHotel}">
+<c:remove var="messageHotel" scope="session" />
 <c:redirect url="./confirmBookingHotel"/>
    
    

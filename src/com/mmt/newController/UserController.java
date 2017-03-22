@@ -319,7 +319,7 @@ public class UserController {
 //				String messageFlight=(String) session.getAttribute("messageFlight");
 //				messageFlight=null;
 //				model.addAttribute("messageFlight", messageFlight);
-				session.removeAttribute("messageFlight");
+				//session.removeAttribute("messageFlight");
 				session.removeAttribute("moneyToBeAdded");
 				model.addAttribute("flightBooking", flightBooking);
 				view="FinalFlightStep";

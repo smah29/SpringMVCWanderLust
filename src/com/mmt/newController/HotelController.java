@@ -277,7 +277,7 @@ public class HotelController {
 			if (hotelBooking != null) {
 				
 				//String messageHotel=(String) session.getAttribute("messageHotel");
-				session.removeAttribute("messageHotel");
+				//session.removeAttribute("messageHotel");
 				session.removeAttribute("moneyToBeAdded");
 				model.addAttribute("hotelBooking", hotelBooking);
 				view="FinalHotelStep";

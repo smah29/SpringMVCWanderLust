@@ -30,7 +30,7 @@ function check(){
 <form action="./MoneyAddded">
 <c:choose>
 <c:when test="${not empty messageFlight}">
-${messageFlight}   
+${messageFlight}
 </c:when>
 <c:when test="${not empty messageHotel}">
 ${messageHotel}   
@@ -40,10 +40,10 @@ ${messageHotel}
 
 <fieldset>
 
-Amount&nbsp;&nbsp;  :&nbsp; &nbsp; <input type="number" min="${moneyToBeAdded}" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/><br>
+Amount&nbsp;&nbsp;  :&nbsp; &nbsp; <input type="number" min="Math.ceil(${moneyToBeAdded})" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/><br>
 <input type="submit" value="Add" id="add" >
 
-<div id ="demo"  data_messageFlight=${messageFlight} moneyRequired=${moneyToBeAdded}></div>
+<div id ="demo"  data_messageFlight=${messageFlight} moneyRequired=Math.ceil(${moneyToBeAdded})></div>
 </fieldset>
 <br>
 <br>
