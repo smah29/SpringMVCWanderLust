@@ -29,7 +29,7 @@ import com.mmt.model.bl.PromotionBlMMT;
 import com.mmt.model.bl.WalletBlMMT;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-@SessionAttributes({"hotelIdNEW","user","moneyToBeAdded","messageHotel","balance","finalValuetobepaid","noOfRooms","din","dout","hotelName","duration","place","from","to","hotelBooking"})
+@SessionAttributes({"hotelIdNEW","user","messageHotel","balance","finalValuetobepaid","noOfRooms","din","dout","hotelName","duration","place","from","to","hotelBooking"})
 @Controller
 public class HotelController {
 	private static Logger logger=Logger.getLogger(PastBookings.class);
@@ -176,9 +176,9 @@ public class HotelController {
 	}
 	
 	@RequestMapping("/PaymentHotel")
-	public String paymentHotel(HttpServletRequest request,HttpSession session,ModelMap model){
+	public ModelAndView paymentHotel(HttpServletRequest request,HttpSession session,ModelMap model){
 		
-		String view=null;
+		ModelAndView mv=null;
 		String promoPickedID = request.getParameter("promohotel");
 		System.out.println("promoPickedID "+promoPickedID);
 		String hotelIDPicked = (String) session.getAttribute("hotelIdNEW");
@@ -220,7 +220,7 @@ public class HotelController {
 				
 				model.addAttribute("finalValuetobepaid", valueAfterPromotion);
 
-				view="ConfirmHotelBooking";
+				mv=new ModelAndView("ConfirmHotelBooking");
 				
 			}
 			else {
@@ -231,16 +231,16 @@ public class HotelController {
 				WalletBlMMT walletBl = new WalletBlMMT();
 				double moneyToBeAdded = valueAfterPromotion - (walletBl.walletBalance(userId));
 				String message = "Add atleast " + moneyToBeAdded + " to Wallet to book hotel room";
-				model.addAttribute("moneyToBeAdded", moneyToBeAdded);
+				//model.addAttribute("moneyToBeAdded", moneyToBeAdded);
 				model.addAttribute("messageHotel", message);
-				view="AddMoney";
+				mv=new ModelAndView("AddMoney","moneyToBeAdded", moneyToBeAdded);
 
 			}
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			
 			e.printStackTrace();
 		}
-		return view;
+		return mv;
 		}
 	
 	@RequestMapping("/confirmBookingHotel")

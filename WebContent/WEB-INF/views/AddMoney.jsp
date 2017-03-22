@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" 
+           uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <jsp:include page="UserDashBoard.jsp"></jsp:include>
@@ -17,11 +19,16 @@ function check(){
 	
 	var demo = document.getElementById("demo"), msgFlight,moneyRequired;
 	msgFlight = demo.getAttribute("data_messageFlight");
+	msgHotel = demo.getAttribute("data_messageHotel");
 	moneyRequired = demo.getAttribute("moneyRequired");
 	if(msgFlight !=null){
 	if(document.getElementById("amount").value < moneyRequired ){
 		alert("Please Enter the Required Amount");
 	}}
+	if(msgHotel !=null){
+		if(document.getElementById("amount").value < moneyRequired ){
+			alert("Please Enter the Required Amount");
+		}}
 	
 }
 </script>
@@ -40,10 +47,13 @@ ${messageHotel}
 
 <fieldset>
 
-Amount&nbsp;&nbsp;  :&nbsp; &nbsp; <input type="number" min="Math.ceil(${moneyToBeAdded})" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/><br>
+Amount&nbsp;&nbsp;  :&nbsp; &nbsp; 
+<!--<input type="number" min="Math.ceil(${moneyToBeAdded})" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/>-->
+<input type="number" min="<fmt:formatNumber value="${moneyToBeAdded}" type="number" pattern="#"/>" required="required" placeholder="Enter Amount"  id="amount" name="amount" onblur="check();"/>
+<br>
 <input type="submit" value="Add" id="add" >
 
-<div id ="demo"  data_messageFlight=${messageFlight} moneyRequired=Math.ceil(${moneyToBeAdded})></div>
+<div id ="demo"  data_messageFlight=${messageFlight} data_messageHotel=${messageHotel} moneyRequired=${moneyToBeAdded}></div>
 </fieldset>
 <br>
 <br>

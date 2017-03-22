@@ -38,7 +38,7 @@ import com.mmt.model.bl.WalletBlMMT;
 
 
 
-@SessionAttributes({"user","admin","flightSource","flightDestination","departureDate","flight","moneyToBeAdded","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking","nomessage"})
+@SessionAttributes({"user","admin","flightSource","flightDestination","departureDate","flight","messageFlight","noOfSeats","balance","msgMoney","finalValuetobepaid","flightBooking","nomessage"})
 @Controller
 public class UserController {
 	private FlightBookingBlMMT flightBookingBlMMT = new FlightBookingBlMMT();
@@ -48,17 +48,22 @@ public class UserController {
 	PromotionBlMMT promoBl = new PromotionBlMMT();
 	ArrayList<Promotion> arrayListPromoFlight = null;
 	FlightPaymentBl flightPaymentBl = new FlightPaymentBl();
+	//Initial Controller
 	@RequestMapping("/")
 	public String newRegistration1(){
 		
 		return "BlackHeader";
 	}
+	
+	//for Login
 	@RequestMapping("/login")
 	public ModelAndView newRegistration2(){
 	
 		//return new ModelAndView("Login","command",new User());
 		return new ModelAndView("Login");
 	}
+	
+	//Wallet jsp redirection
 	@RequestMapping("/Wallet")
 	public String Wallet(){
 	
@@ -74,6 +79,8 @@ public class UserController {
 	
 		return "AboutUs";
 	}
+	
+	//Logout redirects to login 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
@@ -129,6 +136,8 @@ public class UserController {
 		
 		
 	}
+	
+	//Check user exists or not
 	@RequestMapping(value ="/loginCheck", method = RequestMethod.POST)
 	public ModelAndView userLoginCheck(HttpServletRequest request,ModelMap model) throws IOException{
 		String username=request.getParameter("username");
@@ -170,6 +179,8 @@ public class UserController {
 		
 		
 	}
+	
+	//Opens the flight form
 	@RequestMapping("/searchFlight")
 	public String searchFlight(ModelMap model) {
 		Flight flight=new Flight();
@@ -216,9 +227,10 @@ public class UserController {
 		
 	}
 	@RequestMapping("/Payment")
-	public String paymentFlight(HttpServletRequest request,HttpSession session,ModelMap model)
+	public ModelAndView paymentFlight(HttpServletRequest request,HttpSession session,ModelMap model)
 	{
-		String view=null;
+		//String view=null;
+		ModelAndView mv=null;
 		String promoPickedID = request.getParameter("promoflight");
 		double flightTicketPrice = (double) session.getAttribute("flightTicketPrice");
 		String flightIDPicked = (String) session.getAttribute("flightId");
@@ -241,26 +253,27 @@ public class UserController {
 		try {
 			if (flightPaymentBl.checkFunds(userId, valueAfterPromotion)){
 				model.addAttribute("finalValuetobepaid", valueAfterPromotion);
-				view="ConfirmFlightBooking";
+				mv=new ModelAndView("ConfirmFlightBooking");
 			}
 			else{
 				session.setAttribute("finalValuetobepaid", valueAfterPromotion);
 				WalletBlMMT walletBl = new WalletBlMMT();
 				double moneyToBeAdded = valueAfterPromotion - (walletBl.walletBalance(userId));
 				String message = "Add atleast " + moneyToBeAdded + " to Wallet to book flight seat";
-				model.addAttribute("moneyToBeAdded", moneyToBeAdded);
+				//model.addAttribute();
 				model.addAttribute("messageFlight", message);
-				view="AddMoney";
+				mv=new ModelAndView("AddMoney","moneyToBeAdded", moneyToBeAdded);
 			}
 			
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			
 			e.printStackTrace();
 		}
-		return view;
+		return mv;
 	}
 	@RequestMapping("/MoneyAddded")
 	public String moneyAdding(HttpServletRequest request,HttpSession session,ModelMap model){
+		
 		double moneyToAdd = Double.parseDouble(request.getParameter("amount"));
 		WalletBlMMT walletBl = new WalletBlMMT();
 		User user = (User) session.getAttribute("user");
